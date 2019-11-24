@@ -9,7 +9,6 @@ class LoadFile extends Widget {
     return For.of([
       // put your load widgets here
       Score.con(20),
-      Scoreboard("duration")
     ]);
   }
 }

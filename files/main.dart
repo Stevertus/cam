@@ -10,7 +10,7 @@ class MainFile extends Widget {
   Entity p2 = Entity(tags: ["point2"]);
 
   Entity showParticles =
-      Entity.All(tags: ["showParticles"]).not(tags: ["moving"]);
+      Entity.All(tags: []).not(tags: ["moving", "hideParticles"]);
 
   @override
   Widget generate(Context context) {
