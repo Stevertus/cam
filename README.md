@@ -16,13 +16,13 @@ After reloading you can set the points. The datapack will create a little bubble
 
 To set the first point use:
 ```mcfunction
-/function cam:p1
+function cam:p1
 ```
 
 And the same goes with the second point:
 To set the first point use:
 ```mcfunction
-/function cam:p2
+function cam:p2
 ```
 
 After the two points are created, you can see a preview of the camera path.
@@ -31,20 +31,20 @@ After the two points are created, you can see a preview of the camera path.
 To set the duration(in seconds), you have to change the scoreboard `cam.duration`.
 
 ```mcfunction
-/scoreboard players set @s cam.duration 10
+scoreboard players set @s cam.duration 10
 ```
 
 ## Starting and Stopping
 
 Now you can start the camera with:
 ```mcfunction
-/function cam:start
+function cam:start
 ```
 
 The camera will automatically stop when the destination is reached. However you can also manually stop it using:
 
 ```mcfunction
-/function cam:stop
+function cam:stop
 ```
 
 ## Modes
@@ -55,7 +55,7 @@ Due to a threshold in the specators rotation this could stutter sometimes with l
 To fix this, you can switch to old teleporting:
 
 ```mcfunction
-/tag @s add cam.tp
+tag @s add cam.tp
 ```
 
 Remember be in flying mode while activating the camera that way to get the best results.
@@ -63,5 +63,5 @@ Remember be in flying mode while activating the camera that way to get the best 
 In case you dont want to have the particles showing up, you can disable them using:
 
 ```mcfunction
-/tag @s add cam.hideParticles
+tag @s add cam.hideParticles
 ```
