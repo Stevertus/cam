@@ -1,0 +1,5 @@
+name: mccam
+author: stevertus
+dependencies:
+  objd:
+    path: C:\dev\Dart\objectiveD
