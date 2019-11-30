@@ -62,6 +62,25 @@ class CameraPack extends Widget {
                   "Player / Player leaves spectate / Camera reaches end",
             ),
           ),
+          File('remove',
+              child: For.of([
+                Execute.as(Entity.All(), children: [
+                  File.execute("stop", create: false),
+                ]),
+                Kill(Entity(tags: ["point"])),
+                Scoreboard.remove("duration"),
+                Scoreboard.remove("pos"),
+                Scoreboard.remove("objd_consts"),
+                Scoreboard.remove("objd_click"),
+                Tellraw(Entity.Self(), show: [
+                  TextComponent(
+                    "Minecraft Camera Pack has been disabled and removed!",
+                    color: Color.DarkRed,
+                  )
+                ]),
+                Command('datapack disable "file/Minecraft Camera"'),
+                Command('datapack disable "file/Minecraft Camera.zip"'),
+              ]))
         ]);
   }
 }

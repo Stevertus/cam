@@ -9,8 +9,8 @@ void main(List<String> args) {
   Comment.Author = "Stevertus";
   createProject(
     Project(
-      name: 'release/Minecraft Camera',
-      target: "./", // path for where to generate the project
+      name: 'Minecraft Camera',
+      target: "./release/", // path for where to generate the project
       generate: CameraPack(), // The starting point of generation
     ),
     args,

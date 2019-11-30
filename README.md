@@ -26,6 +26,12 @@ function cam:p2
 ```
 
 After the two points are created, you can see a preview of the camera path.
+
+You can also set the points quickly using a carrot on a stick and toggling the points with rightclick:
+
+```mcfunction
+give @s minecraft:carrot_on_a_stick{cam:1b}
+```
 ## Duration
 
 To set the duration(in seconds), you have to change the scoreboard `cam.duration`.
@@ -64,4 +70,25 @@ In case you dont want to have the particles showing up, you can disable them usi
 
 ```mcfunction
 tag @s add cam.hideParticles
+```
+
+You can also remove the interpolation between rotations by adding the tag `cam.noRotation`:
+
+```mcfunction
+tag @s add cam.noRotation
+```
+
+In spectator mode the camera is fixed to the first points rotation and in teleport mode you can rotate freely around and move the camera yourself.
+
+## Removing Points or the entire Pack
+
+To delete the current points, just kill the responsible entities: 
+```mcfunction
+kill @e[tag="cam.point"]
+```
+
+You can remove all scoreboards and the disable the pack with 
+
+```mcfunction
+function cam:remove
 ```

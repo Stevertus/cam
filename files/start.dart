@@ -59,6 +59,28 @@ class StartFile extends Widget {
           pos["dRotX"] - pos["rot1X"],
           pos["dRotY"] - pos["rot1Y"],
 
+          If(pos["dRotX"] > 180, then: [
+            pos["dRotXT"] >> pos["dRotX"],
+            pos["dRotX"] >> 360,
+            pos["dRotX"] - pos["dRotXT"],
+          ]),
+          If(pos["dRotY"] > 180, then: [
+            pos["dRotYT"] >> pos["dRotY"],
+            pos["dRotY"] >> 360,
+            pos["dRotY"] - pos["dRotYT"],
+          ]),
+
+          If(pos["dRotX"] < -180, then: [
+            pos["dRotXT"] >> pos["dRotX"],
+            pos["dRotX"] >> -360,
+            pos["dRotX"] - pos["dRotXT"],
+          ]),
+          If(pos["dRotY"] < -180, then: [
+            pos["dRotYT"] >> pos["dRotY"],
+            pos["dRotY"] >> -360,
+            pos["dRotY"] - pos["dRotYT"],
+          ]),
+
           // divide by 20(every second)
 
           pos["dX"] / 20,

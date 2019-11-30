@@ -1,5 +1,4 @@
 import 'package:objd/core.dart';
-import '../widgets/facingtomotion.dart';
 import '../widgets/animation_step.dart';
 
 class MainFile extends Widget {
@@ -9,8 +8,7 @@ class MainFile extends Widget {
   Entity p1 = Entity(tags: ["point1"]);
   Entity p2 = Entity(tags: ["point2"]);
 
-  Entity showParticles =
-      Entity.All(tags: []).not(tags: ["moving", "hideParticles"]);
+  Entity showParticles = Entity.All().not(tags: ["moving", "hideParticles"]);
 
   @override
   Widget generate(Context context) {
@@ -27,25 +25,6 @@ class MainFile extends Widget {
             delta: Location.glob(),
             player: showParticles,
           )
-        ],
-      ),
-      Execute.asat(
-        Entity(
-          tags: ['mover'],
-        ),
-        children: [
-          FacingToMotion(
-              Entity(limit: 1).sort(Sort.nearest).not(
-                tags: ["mover"],
-                type: EntityType.player,
-              ),
-              speed: -0.5),
-          Comment.Null(),
-          Comment.Null(),
-          If(
-              Entity(distance: Range(to: 1))
-                  .not(tags: ["mover"], type: EntityType.player),
-              then: [Kill()])
         ],
       ),
 

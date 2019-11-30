@@ -32,47 +32,50 @@ class AnimationStep extends Widget {
         scale: 0.001,
         datatype: "double",
       ),
+      If(
+          Entity.Player(distance: Range(to: 1), tags: ["moving"]).not(
+            tags: ["noRotation"],
+          ),
+          then: [
+            // Rotation X
+            pos[Entity.Self()].setToData(
+                Data.get(Entity.Self(), path: "Rotation[0]", scale: 1000)),
+            pos[Entity.Self()] + pos["dRotX"],
+            Data.fromScore(
+              Entity.Self(),
+              score: pos[Entity.Self()],
+              path: "Rotation[0]",
+              scale: 0.001,
+              datatype: "float",
+            ),
 
-      // Rotation X
-
-      pos[Entity.Self()]
-          .setToData(Data.get(Entity.Self(), path: "Rotation[0]", scale: 1000)),
-      pos[Entity.Self()] + pos["dRotX"],
-      Data.fromScore(
-        Entity.Self(),
-        score: pos[Entity.Self()],
-        path: "Rotation[0]",
-        scale: 0.001,
-        datatype: "float",
-      ),
-
-      // Rotation Y
-      pos[Entity.Self()]
-          .setToData(Data.get(Entity.Self(), path: "Rotation[1]", scale: 1000)),
-      pos[Entity.Self()] + pos["dRotY"],
-      Data.fromScore(
-        Entity.Self(),
-        score: pos[Entity.Self()],
-        path: "Rotation[1]",
-        scale: 0.001,
-        datatype: "float",
-      ),
-
+            // Rotation Y
+            pos[Entity.Self()].setToData(
+                Data.get(Entity.Self(), path: "Rotation[1]", scale: 1000)),
+            pos[Entity.Self()] + pos["dRotY"],
+            Data.fromScore(
+              Entity.Self(),
+              score: pos[Entity.Self()],
+              path: "Rotation[1]",
+              scale: 0.001,
+              datatype: "float",
+            ),
+          ]),
       dur[Entity.Self()] + 1,
-
       If(dur[Entity.Self()] > dur["current"], then: [
+        Log("stop1"),
         File.execute("stop", create: false),
       ]),
-
       Execute.as(Entity.Player(), children: [
         Execute.as(
-          Entity.Self(distance: Range(from: 0.4)).not(tags: ["tp"]),
+          Entity.Self(distance: Range(from: 2)).not(tags: ["tp"]),
           children: [
+            Log("stop2"),
             File.execute("stop", create: false),
           ],
         ),
         Execute.as(
-          Entity.Self(tags: ["tp"]),
+          Entity.Self(tags: ["tp"]).not(tags: ["noRotation"]),
           children: [
             Tp(
               Entity.Self(),
@@ -80,7 +83,16 @@ class AnimationStep extends Widget {
               rot: Rotation.here(),
             ),
           ],
-        )
+        ),
+        Execute.as(
+          Entity.Self(tags: ["tp", "noRotation"]),
+          children: [
+            Tp(
+              Entity.Self(),
+              to: Location.here(),
+            ),
+          ],
+        ),
       ]),
     ]);
   }

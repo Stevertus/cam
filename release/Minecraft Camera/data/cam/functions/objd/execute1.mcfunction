@@ -1,6 +1,8 @@
-execute facing entity @e[limit=1,sort=nearest,type=!player,tag=!cam.mover] feet positioned 0 0 0 run summon area_effect_cloud ^ ^ ^-0.5 {Tags:["cam.posToMotion"]}
-data modify entity @s Motion[0] set from entity @e[limit=1,tag=cam.posToMotion] Pos[0]
-data modify entity @s Motion[1] set from entity @e[limit=1,tag=cam.posToMotion] Pos[1]
-data modify entity @s Motion[2] set from entity @e[limit=1,tag=cam.posToMotion] Pos[2]
-title @a actionbar [{"nbt":"Motion","entity":"@s"}]
-execute if entity @e[distance=..1,type=!player,tag=!cam.mover] run kill
+execute store result entity @s Motion[0] double 0.001 run scoreboard players get dX cam.pos
+execute store result entity @s Motion[1] double 0.001 run scoreboard players get dY cam.pos
+execute store result entity @s Motion[2] double 0.001 run scoreboard players get dZ cam.pos
+execute if entity @p[distance=..1,tag=!cam.noRotation] run function cam:objd/if1
+scoreboard players add @s cam.duration 1
+execute if score @s cam.duration > current cam.duration run tellraw @a [{"text":"Console > ","color":"dark_aqua"},{"text":"stop1"}]
+execute if score @s cam.duration > current cam.duration run function cam:stop
+execute as @p run function cam:objd/execute3
